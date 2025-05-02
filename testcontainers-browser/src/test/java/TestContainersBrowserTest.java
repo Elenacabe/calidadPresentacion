@@ -1,7 +1,3 @@
-import java.io.File;
-import java.time.Duration;
-
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -12,6 +8,11 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testcontainers.containers.BrowserWebDriverContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
+
+import java.io.File;
+import java.time.Duration;
+
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @Testcontainers
 public class TestContainersBrowserTest {
@@ -35,7 +36,8 @@ public class TestContainersBrowserTest {
         
         // Navega directamente a la página del gato 404
         driver.get("https://http.cat/status/404");
-        
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.tagName("body"))); // Espera que cargue el body
+
         // Espera a que la imagen esté visible
         WebElement img404 = wait.until(ExpectedConditions.visibilityOfElementLocated(
             By.xpath("//img[contains(@src,'404')]")
